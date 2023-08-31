@@ -14,16 +14,16 @@ const categorylist = async () => {
     catContainer.appendChild(div);
         
     });
-    console.log(data.data);
+    
 };
 
 const loadvideos = async (catId) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${catId}`);
     const data = await res.json();
-    console.log(data.data);
+    
 
     const cards = document.getElementById("card-container");
-
+    cards.innerHTML = " ";
     data.data.forEach((videos)=>{
         console.log(videos);
         const div = document.createElement('div');
@@ -31,9 +31,7 @@ const loadvideos = async (catId) => {
         <figure><img src=${videos.thumbnail} /></figure>
         <div class="card-body">
           <h2 class="card-title"> <img src=${videos?.authors?.[0].profile_picture} class="w-10 h-10 rounded-full" /> ${videos.title}</h2>
-          <p>${videos?.authors?.[0].profile_name} 
-          
-          </p>
+          <p>${videos?.authors?.[0].profile_name}   ${videos?.authors?.[0].verified}</p>
           <p>${videos.others.views}</p>
           <div class="">
           </div>
@@ -47,3 +45,4 @@ const loadvideos = async (catId) => {
 
 
 categorylist();
+loadvideos("1000");
