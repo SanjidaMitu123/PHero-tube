@@ -9,14 +9,13 @@ const categorylist = async () => {
        
         const div = document.createElement("div");
         div.innerHTML = `
-        <button  onclick="loadvideos('${cat.category_id}')" class="btn btn-ghost bg-[#25252533] mr-1 hover:bg-[#FF1F3D] active:bg-[#FF1F3D]">${cat.category}</button>
-    
-        `;
-     
+        <button  onclick="loadvideos('${cat.category_id}')" class="btn btn-ghost bg-[#25252533] mr-1 hover:bg-[#FF1F3D] active:bg-[#FF1F3D]">${cat.category}</button> `;
     catContainer.appendChild(div);
    
     });
 };
+
+
 
 const loadvideos = async (catId) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${catId}`);
@@ -25,12 +24,12 @@ const loadvideos = async (catId) => {
     const cards = document.getElementById("card-container");
     cards.innerHTML = " ";
       
-    // console.log(data.data);
+    console.log(data.data);
     if (data.data.length == "")
     {
       const div = document.createElement('div');
-        div.innerHTML=`<img src="./img/icon.png" class=" h-[300px] w-[300px] center pr-10 ml-30 " />
-        <h1 class=" text-center text-5xl font-extrabold">Oops!! Sorry, There is no content here</h1>
+        div.innerHTML=`<img src="./img/icon.png" class="  h-[300px] w-[300px] center pr-10 ml-[470px] mt-[50px]  " />
+        <h1 class=" ml-[300px] mr-[-550px] text-center text-3xl font-extrabold">Oops!! Sorry, There is no content here</h1>
         `;
       cards.appendChild(div);
     }
@@ -38,7 +37,7 @@ const loadvideos = async (catId) => {
     data.data.forEach((videos)=>{
       
         // console.log(videos.others.views.slice(0,3));
-
+        
        function hr(sec){
         const hours = Math.floor(sec / 3600);
         const minutes = Math.floor((sec % 3600) / 60);
@@ -48,13 +47,13 @@ const loadvideos = async (catId) => {
         
        
         const div = document.createElement('div');
-        div.innerHTML=` <div class="card w-66 h-[400px] bg-base-100 m-6 shadow-xl">
-        <figure class="h-[200px] "><img src=${videos.thumbnail} class="relative" /><span class="text-white bg-black absolute bottom-[220px] right-1">${time}</span></figure>
+        div.innerHTML=` <div class="card  h-[400px] bg-base-100 m-2 shadow-xl">
+        <figure class="h-[180px] "><img src=${videos.thumbnail} class="relative" /><span class="text-white bg-black absolute bottom-[220px] right-1">${time }</span></figure>
         <div class="card-body">
           <h2 class="card-title"> <img src=${videos?.authors?.[0].profile_picture} class="w-10 h-10 rounded-full" /> ${videos.title}</h2>
           
 
-          <p>${videos?.authors?.[0].profile_name}   ${videos.authors?.[0]?.verifie  ? "fjk" : " " }</p>
+          <h1 class="flex w-[300px]">${videos?.authors?.[0].profile_name}${videos.authors?.[0]?.verified ? `<img src="./img/vrified.PNG" class="h-[20px] w-[20px]" />` : " " }</h1>
           <p>${videos.others.views}</p>
           <div class="">
           </div>
@@ -67,6 +66,8 @@ const loadvideos = async (catId) => {
   }
   
 };
+
+
 
 // const cid = "1000";
 // const videosortviwes = async (cid) => {
