@@ -26,7 +26,7 @@ const loadvideos = async (catId) => {
     const cards = document.getElementById("card-container");
     cards.innerHTML = " ";
    
-    console.log(data.data);
+    console.log(data.data)
     if (data.data.length == "")
     {
       const div = document.createElement('div');
@@ -38,7 +38,7 @@ const loadvideos = async (catId) => {
     else{
     data.data.forEach((videos)=>{
       
-        // console.log(videos.others.views.slice(0,3));
+        
 
        function hr(sec){
         const hours = Math.floor(sec / 3600);
@@ -47,7 +47,9 @@ const loadvideos = async (catId) => {
        }
        const time = hr(parseInt(videos.others.posted_date));
         
-     
+      
+       
+
       const div = document.createElement('div');
         div.innerHTML=` <div class="card  h-[400px] bg-base-100 m-2 shadow-xl">
         <figure class="h-[180px] "><img src=${videos.thumbnail} class="relative" /><span class="text-white bg-black absolute bottom-[220px] right-1">${time }</span></figure>
@@ -70,10 +72,9 @@ const loadvideos = async (catId) => {
 
 
 
+const sortvideoes = async (cid) => {
 
-const sortvideoes = async (catId) => {
-
-const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${catId}`);
+const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${cid}`);
 const data = await res.json();
 const cards = document.getElementById("card-container");
 cards.innerHTML = " ";
